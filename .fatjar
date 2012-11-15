@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Tue Nov 06 21:08:34 CST 2012
+onejar.license.required=true
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=XrayInformer.jar
+manifest.mergeall=true
+manifest.mainclass=
+manifest.file=<createnew>
+jarname.isextern=false
+onejar.expand=
+excludes=<jar|LogBlock.jar>;<jar|bukkit-1.4.2-R0.3-20121103.060132-2.jar>
+includes=
