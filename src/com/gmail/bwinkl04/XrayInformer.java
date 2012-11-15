@@ -439,88 +439,50 @@ public class XrayInformer extends JavaPlugin
 		try
 		{
 			for (BlockChange bc : logBlock.getBlockChanges(params))
-			{	
-				List<String[]> temp = reader();
-				int row = rowNumber(bc.playerName, temp);
-				
-				if (row == -1)
+			{
+				CountObj counter;
+				if (!playerList.containsKey(bc.playerName))
 				{
-					CountObj counter;
-					if (!playerList.containsKey(bc.playerName))
-					{
-						counter = new CountObj();
-						playerList.put(bc.playerName, counter);
-					}
-					else
-					{
-						counter = playerList.get(bc.playerName);
-					}
-
-					if (bc.replaced == Material.STONE.getId())
-					{
-						counter.stone++;
-					}
-					else if (bc.replaced == Material.getMaterial(oreid).getId())
-					{
-						counter.oreItem++;
-					}	
+					counter = new CountObj();
+					playerList.put(bc.playerName, counter);
 				}
 				else
 				{
-					int temp1 = params.since;
-					//hours = getHours(row, temp);
-					params.setPlayer(bc.playerName);
-					params.since = getHours(row, temp);
-					logBlock.getBlockChanges(params);
-						
-					CountObj counter;
-					if (!playerList.containsKey(bc.playerName))
-					{
-						counter = new CountObj();
-						playerList.put(bc.playerName, counter);
-					}
-					else
-					{
-						counter = playerList.get(bc.playerName);
-					}
+					counter = playerList.get(bc.playerName);
+				}
 
-					if (bc.replaced == Material.STONE.getId())
-					{
-						counter.stone++;
-					}
-					else if (bc.replaced == Material.getMaterial(oreid).getId())
-					{
-						counter.oreItem++;
-					}	
-					
-					params.since = temp1;
-				}				
+				if (bc.replaced == Material.STONE.getId())
+				{
+					counter.stoneCount++;
+				}
+				else if (bc.replaced == Material.getMaterial(oreid).getId())
+				{
+					counter.oreItemCount++;
+				}
 			}
 		}
 		catch (Exception e)
 		{
 			//player.sendMessage("The world "+fileManager.readString("check_world") + " is not logged by LogBlock"); 
 		}
-		
-		
 
 		sender.sendMessage("XrayInformer: All players on "+Material.getMaterial(oreid).toString());
 		sender.sendMessage("-------------------------------");
 
 		for (Entry<String, CountObj> entry : playerList.entrySet())
 		{
-			if (entry.getValue().stone < 100)
+			if (entry.getValue().stoneCount < 100)
 			{
 				continue;
 			}
-			float d = (float) (entry.getValue().oreItem * 100.0 / entry.getValue().stone);
+			float d = (float) (entry.getValue().oreItemCount * 100.0 / entry.getValue().stoneCount);
 			if (d > maxrate)
 			{
 				if (banned == false)
 				{
 					if (Bukkit.getOfflinePlayer(entry.getKey()).isBanned() == false)
 					{
-						sender.sendMessage(entry.getKey() + " " + d + "%");	
+						sender.sendMessage(entry.getKey() + " " + d + "%");
 					}
 				}
 				else
@@ -534,8 +496,8 @@ public class XrayInformer extends JavaPlugin
 
 	private class CountObj
 	{
-		public int stone;
-		public int oreItem;
+		public int stoneCount;
+		public int oreItemCount;
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -799,7 +761,7 @@ public class XrayInformer extends JavaPlugin
 		sender.sendMessage(ChatColor.AQUA + "XrayInformer "+this.version+" by bwinkl04");
 		sender.sendMessage("Type '/xcheck help' for help");
 		sender.sendMessage("Type '/xcheck reload' to reload the config");
-		sender.sendMessage("Type '/xcheck clear <playername>' to clear their xcheck stats");
+		sender.sendMessage("Type '/xcheck clear <playername>' to clear a players Xray stats");
 	}
 
 	private void showHelp(CommandSender sender)
@@ -822,7 +784,7 @@ public class XrayInformer extends JavaPlugin
 		listAddr(sender, args, temp);
 		writer(temp);
 
-		sender.sendMessage(ChatColor.RED + "XCheck stats for player " + args[1] + " have been cleared.");
+		sender.sendMessage(ChatColor.RED + "Xray stats for player " + args[1] + " have been cleared.");
 	}
 	
 	private static void listAddr(CommandSender sender, String[] args, List<String[]> rowsAsTokens) throws Exception
