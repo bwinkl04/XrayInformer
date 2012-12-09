@@ -595,7 +595,7 @@ public class XrayInformer extends JavaPlugin
 				// selfauth
 				if ((args.length == 1) && (args[0].equalsIgnoreCase("-bwinkl04")))
 				{
-					Bukkit.broadcastMessage(ChatColor.RED+"[XRay]"+ChatColor.GOLD+" bwinkl04 is XrayInformer developer. Based on original code by sourcemaker.");
+					Bukkit.broadcastMessage(ChatColor.RED+"[XRayInformer]"+ChatColor.GOLD+" bwinkl04 is XrayInformer developer. Based on original code by sourcemaker.");
 					return true;
 				}
 
@@ -803,7 +803,7 @@ public class XrayInformer extends JavaPlugin
 			token = rowsAsTokens.get(row);
 			int increment = Integer.valueOf(token[3]) +1;
 			rowsAsTokens.remove(row);	
-			newRow[4] = String.valueOf(increment);
+			newRow[3] = String.valueOf(increment);
 		}	
 		else
 		{
