@@ -1,4 +1,4 @@
-package com.gmail.bwinkl04;
+package com.gmail.bwinkl04.XrayInformer;
 
 import org.bukkit.command.CommandSender;
 

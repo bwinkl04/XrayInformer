@@ -1,8 +1,8 @@
 name: XrayInformer
-version: 2.2.3
+version: 3.0.1_beta
 description: This plugin helps to protect your server from Xrayers
 author: bwinkl04
-main: com.gmail.bwinkl04.XrayInformer
+main: com.gmail.bwinkl04.XrayInformer.XrayInformer
 depend: [LogBlock]
 commands:
   xcheck:
@@ -10,4 +10,7 @@ commands:
 permissions: 
   xcheck.check:
     description: Allows the XrayInformer to check players
+    default: false
+  xcheck.receive:
+    description: These members will receive messages when a cheater joins the game
     default: false

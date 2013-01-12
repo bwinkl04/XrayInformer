@@ -6,6 +6,6 @@
 	<classpathentry kind="lib" path="/Users/Brian/Desktop/javaWorkspace/LogBlock.jar"/>
 	<classpathentry kind="lib" path="/Users/Brian/Desktop/javaWorkspace/opencsv-2.3/deploy/opencsv-2.3.jar"/>
 	<classpathentry kind="lib" path="/Users/Brian/Desktop/javaWorkspace/joda-time-2.1/joda-time-2.1.jar"/>
-	<classpathentry kind="lib" path="/Users/Brian/Desktop/javaWorkspace/bukkit-1.4.4-R0.1-20121114.033239-1.jar"/>
+	<classpathentry kind="lib" path="/Users/Brian/Desktop/javaWorkspace/bukkit-1.4.5-R0.3-20121211.011136-19.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

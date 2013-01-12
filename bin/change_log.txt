@@ -1,0 +1,23 @@
+3.0.1
+[list][*] Complete rewrite of all code, should be more efficient.
+[*] xcheck player:all now displays correctly when a player was cleared (only non cleared players).
+[*] Notifies players (staff) with the xcheck.receive permission when a player with a xLevel above 100 joins the game.
+
+2.2.4
+[*] Small, but important change to package name.
+[*] Cleaned code a little.
+
+2.2.3
+[*] fixed small error in calculating a cleared player.
+
+2.2.2
+[*] added clear argument
+[*] removed the - in front of arguments
+[*] cleaned up code a little
+[*] fixed some typos
+
+2.2.0
+[*] added since-parameter (since:int (hours))
+[*] added emerald ores
+[*] changes for the altered logblock api
+[/list]

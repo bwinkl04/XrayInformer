@@ -1,14 +1,14 @@
 #Fat Jar Configuration File
-#Thu Nov 22 14:50:43 CST 2012
+#Tue Dec 11 17:12:48 CST 2012
 onejar.license.required=true
 manifest.classpath=
 manifest.removesigners=true
 onejar.checkbox=false
-jarname=XrayInformer2.2.3.jar
+jarname=XrayInformer.jar
 manifest.mergeall=true
 manifest.mainclass=
 manifest.file=<createnew>
 jarname.isextern=false
 onejar.expand=
-excludes=<jar|LogBlock.jar>;<jar|bukkit-1.4.4-R0.1-20121114.033239-1.jar>
-includes=
+excludes=<jar|LogBlock.jar>;<jar|bukkit-1.4.5-R0.3-20121211.011136-19.jar>
+includes=<inc|XrayInformer/resources>
