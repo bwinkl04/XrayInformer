@@ -72,7 +72,7 @@ public class XrayInformer extends JavaPlugin implements Listener
 	}
 
 	@EventHandler
-	public boolean onPlayerJoin(PlayerJoinEvent evt)
+	public void onPlayerJoin(PlayerJoinEvent evt)
 	{
 		String playerName = evt.getPlayer().getName();
 		String world = defaultWorld;
@@ -80,6 +80,7 @@ public class XrayInformer extends JavaPlugin implements Listener
 		int hours = -1;
 		try 
 		{
+			reader();
 			int row = rowNumber(playerName);
 			if (row >= 0)
 			{
@@ -96,39 +97,70 @@ public class XrayInformer extends JavaPlugin implements Listener
 			int mossy_count = oreLookup(playerName, 48, world, hours);
 			int emerald_count = oreLookup(playerName, 129, world, hours);
 			
-			if (config.isActive("diamond") && diamond_count > 0) 
+			String dia = "";
+			String gld = "";
+			String lap = "";
+			String emr = "";
+			String irn = "";
+			String msy = "";
+			
+			if (config.isActive("diamond") && diamond_count > 0)	
 			{
 				float d = (float) (diamond_count * 100.0 / count_stone);
+				if (d > config.getRate("confirmed", "diamond")) 
+				{
+					dia = "diamond, ";
+				}
 				level = (int) (level + (d * 10));
 			} 
 
 			if (config.isActive("gold") && gold_count > 0) 
 			{ 
 				float d = (float) (gold_count * 100.0 / count_stone);
+				if (d > config.getRate("confirmed", "gold"))
+				{ 
+					gld = "gold, ";
+				}
 				level = (int) (level + (d * 3));
 			}
 			
 			if (config.isActive("lapis") && lapis_count > 0) 
 			{ 
 				float d = (float) (lapis_count * 100.0 / count_stone);
+				if (d > config.getRate("confirmed", "lapis")) 
+				{
+					lap = "lapis, ";
+				}
 				level = (int) (level + (d * 10));
 			}
 			
 			if (config.isActive("emerald") && emerald_count > 0)
 			{ 
 				float d = (float) (emerald_count * 100.0 / count_stone);
+				if (d > config.getRate("confirmed", "emerald"))
+				{
+					emr = "emerald, ";
+				}
 				level = (int) (level + (d * 10));
 			}
 
 			if (config.isActive("iron") && iron_count > 0)
 			{ 
 				float d = (float) (iron_count * 100.0 / count_stone);
+				if (d > config.getRate("confirmed", "iron"))
+				{
+					irn = "iron, ";
+				}
 				level = (int) (level + (d * 1));
 			}
 
 			if (config.isActive("mossy") && mossy_count > 0)
 			{ 
 				float d = (float) (mossy_count * 100.0 / count_stone);
+				if (d > config.getRate("confirmed", "mossy"))
+				{
+					msy = "mossy, ";
+				}
 				level = (int) (level + (d * 7));
 			}
 			
@@ -141,14 +173,14 @@ public class XrayInformer extends JavaPlugin implements Listener
 				level = level * 2;
 			}
 			
-			if (level >= 100)
+			if ((dia != "") || (gld != "") || (lap != "") || (emr != "") || (irn != "") || (msy != ""))
 			{
 				for (Player staff: getServer().getOnlinePlayers())
 				{
 					if (staff.hasPermission("xcheck.receive") || staff.isOp())
 					{
-						staff.sendMessage(ChatColor.RED + "[XrayInformer] Player " + playerName + " has a xLevel of: " + level);
-						staff.sendMessage(ChatColor.RED + "and may be a cheater. Watch carefully.");
+						staff.sendMessage(ChatColor.RED + "[XrayInformer] Player " + playerName + " has higher then average stats for " + dia + gld + lap + emr + irn + msy + " and may be a cheater. Watch carefully.");
+						//staff.sendMessage(ChatColor.RED );
 					}
 				}
 			}
@@ -158,7 +190,6 @@ public class XrayInformer extends JavaPlugin implements Listener
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return true;
 	}
 
 	//@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -169,7 +200,7 @@ public class XrayInformer extends JavaPlugin implements Listener
 
 		if (cmd.getName().equalsIgnoreCase("xcheck"))
 		{
-			if (sender.hasPermission("xcheck.check") || sender.isOp()) // just for support and only with agreement from the administration
+			if (sender.hasPermission("xcheck.check") || sender.isOp())
 			{
 				// predef vars
 				String playername = "";
@@ -231,7 +262,7 @@ public class XrayInformer extends JavaPlugin implements Listener
 					world = hm.get("world").toString();
 					if (getServer().getWorld(world) == null)
 					{
-						sender.sendMessage("This world does not exist. Please check your world-parameter.");
+						sender.sendMessage(ChatColor.RED + "[XrayInformer]" + ChatColor.WHITE + " This world does not exist. Please check your world-parameter.");
 						return true;
 					}
 				}
@@ -249,14 +280,14 @@ public class XrayInformer extends JavaPlugin implements Listener
 				if ((args.length == 1) && (args[0].equalsIgnoreCase("reload")))
 				{
 					config.load();
-					sender.sendMessage("XrayInformer config reloaded.");
+					sender.sendMessage(ChatColor.RED + "[XrayInformer]" + ChatColor.WHITE + " Config reloaded.");
 					return true;
 				}
 
 				// selfauth
 				if ((args.length == 1) && (args[0].equalsIgnoreCase("-bwinkl04")))
 				{
-					Bukkit.broadcastMessage(ChatColor.RED+"[XRayInformer]"+ChatColor.GOLD+" bwinkl04 is XrayInformer v" + version + " developer. Based on original code by sourcemaker.");
+					Bukkit.broadcastMessage(ChatColor.RED + "[XrayInformer]" + ChatColor.WHITE + " bwinkl04 is XrayInformer v" + version + " developer. Based on original code by sourcemaker.");
 					return true;
 				}
 
@@ -417,7 +448,7 @@ public class XrayInformer extends JavaPlugin implements Listener
 			}
 			else
 			{
-				sender.sendMessage(ChatColor.RED + "Sorry, you do not have permission for this command.");
+				sender.sendMessage(ChatColor.RED + "[XrayInformer]" + ChatColor.WHITE+ " You do not have permission for this command.");
 				return true;
 			}
 		}
@@ -843,7 +874,7 @@ public class XrayInformer extends JavaPlugin implements Listener
 		listAddr(sender, args);
 		writer();
 
-		sender.sendMessage(ChatColor.RED + "Xray stats for player " + args[1] + " have been cleared.");
+		sender.sendMessage(ChatColor.RED + "[XrayInformer]" + ChatColor.WHITE + " Xray stats for player " + args[1] + " have been cleared.");
 	}
 	
 	private static void listAddr(CommandSender sender, String[] args) throws Exception

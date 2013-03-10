@@ -1,5 +1,5 @@
 name: XrayInformer
-version: 3.0.1_beta
+version: 3.0.1
 description: This plugin helps to protect your server from Xrayers
 author: bwinkl04
 main: com.gmail.bwinkl04.XrayInformer.XrayInformer

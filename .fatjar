@@ -1,5 +1,5 @@
 #Fat Jar Configuration File
-#Tue Dec 11 17:12:48 CST 2012
+#Wed Jan 16 14:16:42 CST 2013
 onejar.license.required=true
 manifest.classpath=
 manifest.removesigners=true
@@ -10,5 +10,5 @@ manifest.mainclass=
 manifest.file=<createnew>
 jarname.isextern=false
 onejar.expand=
-excludes=<jar|LogBlock.jar>;<jar|bukkit-1.4.5-R0.3-20121211.011136-19.jar>
+excludes=<jar|LogBlock.jar>;<jar|craftbukkit-1.4.6-R0.4-20130116.140806-12.jar>
 includes=<inc|XrayInformer/resources>

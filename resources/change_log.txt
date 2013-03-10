@@ -1,7 +1,7 @@
 3.0.1
-[list][*] Complete rewrite of all code, should be more efficient.
-[*] xcheck player:all now displays correctly when a player was cleared (only non cleared players).
-[*] Notifies players (staff) with the xcheck.receive permission when a player with a xLevel above 100 joins the game.
+[list][*] Complete rewrite of most code, should be more efficient. Still have more work to do on this, but its MUCH better.
+[*] /xcheck player:all now displays the correct info after a player has been cleared (shows only non cleared players).
+[*] Notifies players (staff) with the xcheck.receive permission when a player with a high probability joins the game.
 
 2.2.4
 [*] Small, but important change to package name.
